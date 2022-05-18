@@ -23,6 +23,7 @@ class RepVGGBlock(nn.Module):
         assert kernel_size == 3
         assert padding == 1
 
+        #conv3x3的padding是1，conv1x1不pad，保证输入的矩阵形状一致
         padding_11 = padding - kernel_size // 2
 
         self.nonlinearity = nn.ReLU()
@@ -37,22 +38,33 @@ class RepVGGBlock(nn.Module):
                                       padding=padding, dilation=dilation, groups=groups, bias=True, padding_mode=padding_mode)
 
         else:
-            self.rbr_identity = nn.BatchNorm2d(num_features=in_channels) if out_channels == in_channels and stride == 1 else None
-            self.rbr_dense = conv_bn(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size, stride=stride, padding=padding, groups=groups)
+            self.rbr_identity = nn.BatchNorm2d(num_features=in_channels) if (out_channels == in_channels and stride == 1) else None
+
+            #rbr_dense : 3x3conv分支
+            self.rbr_dense = conv_bn(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size, stride=stride,
+                                     padding=padding, groups=groups)
             self.rbr_1x1 = conv_bn(in_channels=in_channels, out_channels=out_channels, kernel_size=1, stride=stride, padding=padding_11, groups=groups)
-            print('RepVGG Block, identity = ', self.rbr_identity)
+            print('RepVGG Block的identity分支 = ', self.rbr_identity)
 
 
     def forward(self, inputs):
         if hasattr(self, 'rbr_reparam'):
-            return self.nonlinearity(self.se(self.rbr_reparam(inputs)))
+            #self.nonlinearity = nn.ReLU()
+            return self.nonlinearity(
+                                     self.se(
+                                             self.rbr_reparam(
+                                                                inputs)
+                                            )
+                                    )
 
         if self.rbr_identity is None:
             id_out = 0
         else:
             id_out = self.rbr_identity(inputs)
 
-        return self.nonlinearity(self.se(self.rbr_dense(inputs) + self.rbr_1x1(inputs) + id_out))
+        return self.nonlinearity(self.se(self.rbr_dense(inputs) + 
+                                self.rbr_1x1(inputs) + 
+                                id_out))
 
 
     #   Optional. This improves the accuracy and facilitates quantization.
@@ -84,7 +96,7 @@ class RepVGGBlock(nn.Module):
         kernel3x3, bias3x3 = self._fuse_bn_tensor(self.rbr_dense)
         kernel1x1, bias1x1 = self._fuse_bn_tensor(self.rbr_1x1)
         kernelid, biasid = self._fuse_bn_tensor(self.rbr_identity)
-        return kernel3x3 + self._pad_1x1_to_3x3_tensor(kernel1x1) + kernelid, bias3x3 + bias1x1 + biasid
+        return (kernel3x3 + self._pad_1x1_to_3x3_tensor(kernel1x1) + kernelid ), (bias3x3 + bias1x1 + biasid )
 
     def _pad_1x1_to_3x3_tensor(self, kernel1x1):
         if kernel1x1 is None:
@@ -118,19 +130,21 @@ class RepVGGBlock(nn.Module):
             eps = branch.eps
         std = (running_var + eps).sqrt()
         t = (gamma / std).reshape(-1, 1, 1, 1)
-        return kernel * t, beta - running_mean * gamma / std
+        return (kernel * t), (beta - running_mean * gamma / std )
 
     def switch_to_deploy(self):
         if hasattr(self, 'rbr_reparam'):
             return
+        #else:
         kernel, bias = self.get_equivalent_kernel_bias()
         self.rbr_reparam = nn.Conv2d(in_channels=self.rbr_dense.conv.in_channels, out_channels=self.rbr_dense.conv.out_channels,
                                      kernel_size=self.rbr_dense.conv.kernel_size, stride=self.rbr_dense.conv.stride,
-                                     padding=self.rbr_dense.conv.padding, dilation=self.rbr_dense.conv.dilation, groups=self.rbr_dense.conv.groups, bias=True)
+                                     padding=self.rbr_dense.conv.padding, dilation=self.rbr_dense.conv.dilation, 
+                                     groups=self.rbr_dense.conv.groups, bias=True)
         self.rbr_reparam.weight.data = kernel
         self.rbr_reparam.bias.data = bias
-        for para in self.parameters():
-            para.detach_()
+        for para in self.parameters(): para.detach_()
+
         self.__delattr__('rbr_dense')
         self.__delattr__('rbr_1x1')
         if hasattr(self, 'rbr_identity'):
@@ -155,6 +169,7 @@ class RepVGG(nn.Module):
 
         self.stage0 = RepVGGBlock(in_channels=3, out_channels=self.in_planes, kernel_size=3, stride=2, padding=1, deploy=self.deploy, use_se=self.use_se)
         self.cur_layer_idx = 1
+        # 一个stage有多个RepVGG-block
         self.stage1 = self._make_stage(int(64 * width_multiplier[0]), num_blocks[0], stride=2)
         self.stage2 = self._make_stage(int(128 * width_multiplier[1]), num_blocks[1], stride=2)
         self.stage3 = self._make_stage(int(256 * width_multiplier[2]), num_blocks[2], stride=2)
@@ -202,6 +217,9 @@ def create_RepVGG_A2(deploy=False):
     return RepVGG(num_blocks=[2, 4, 14, 1], num_classes=1000,
                   width_multiplier=[1.5, 1.5, 1.5, 2.75], override_groups_map=None, deploy=deploy)
 
+
+
+
 def create_RepVGG_B0(deploy=False):
     return RepVGG(num_blocks=[4, 6, 16, 1], num_classes=1000,
                   width_multiplier=[1, 1, 1, 2.5], override_groups_map=None, deploy=deploy)
@@ -244,6 +262,8 @@ def create_RepVGG_B3g4(deploy=False):
     return RepVGG(num_blocks=[4, 6, 16, 1], num_classes=1000,
                   width_multiplier=[3, 3, 3, 5], override_groups_map=g4_map, deploy=deploy)
 
+
+# 只有这网络会用SE模块
 def create_RepVGG_D2se(deploy=False):
     return RepVGG(num_blocks=[8, 14, 24, 1], num_classes=1000,
                   width_multiplier=[2.5, 2.5, 2.5, 5], override_groups_map=None, deploy=deploy, use_se=True)
@@ -263,7 +283,8 @@ func_dict = {
 'RepVGG-B3': create_RepVGG_B3,
 'RepVGG-B3g2': create_RepVGG_B3g2,
 'RepVGG-B3g4': create_RepVGG_B3g4,
-'RepVGG-D2se': create_RepVGG_D2se,      #   Updated at April 25, 2021. This is not reported in the CVPR paper.
+# June 22, 2021 A pure-VGG model (without SE) seems to outperform some vision transformer models with a better training scheme. 
+'RepVGG-D2se': create_RepVGG_D2se, #   Updated at April 25, 2021. This is not reported in the CVPR paper.
 }
 def get_RepVGG_func_by_name(name):
     return func_dict[name]

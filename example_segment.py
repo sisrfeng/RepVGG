@@ -47,10 +47,12 @@ class PSPNet(nn.Module):
             checkpoint = torch.load(backbone_file)
             if 'state_dict' in checkpoint:
                 checkpoint = checkpoint['state_dict']
-            ckpt = {k.replace('module.', ''): v for k, v in checkpoint.items()}  # strip the names
+            ckpt = {k.replace('module.', ''): v
+                    for k, v in checkpoint.items()} # strip the names
             backbone.load_state_dict(ckpt)
 
-        self.layer0, self.layer1, self.layer2, self.layer3, self.layer4 = backbone.stage0, backbone.stage1, backbone.stage2, backbone.stage3, backbone.stage4
+        # PSPNet的layer其实是RepVGG的一个block
+        (self.layer0, self.layer1, self.layer2, self.layer3, self.layer4) = (backbone.stage0, backbone.stage1, backbone.stage2, backbone.stage3, backbone.stage4)
 
         #   The last two stages should have stride=1 for semantic segmentation
         #   Note that the stride of 1x1 should be the same as the 3x3
@@ -67,7 +69,7 @@ class PSPNet(nn.Module):
         last_channel = 0
         for n, m in self.layer4.named_modules():
             if ('rbr_dense' in n or 'rbr_reparam' in n) and isinstance(m, nn.Conv2d):
-                m.dilation, m.padding, m.stride = (4, 4), (4, 4), (1, 1)
+                m.dilation, m.padding, m.stride = (4, 4), (4, 4), (1, 1)  #和上面那堆的唯一区别
                 print('change dilation, padding, stride of ', n)
                 last_channel = m.out_channels
             elif 'rbr_1x1' in n and isinstance(m, nn.Conv2d):
