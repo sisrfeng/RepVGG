@@ -1,0 +1,161 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/data2/wf2/ori_RepVGG/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+Abstract	README.md	/^# Abstract$/;"	c
+AverageMeter	utils.py	/^class AverageMeter(object):$/;"	c
+BNStatistics	insert_bn.py	/^class BNStatistics(nn.Module):$/;"	c
+BiasAdd	insert_bn.py	/^class BiasAdd(nn.Module):$/;"	c
+Contact	README.md	/^## Contact$/;"	s	chapter:FAQs
+Convert the training-time models into inference-time	README.md	/^# Convert the training-time models into inference-time$/;"	c
+F	example_segment.py	/^import torch.nn.functional as F$/;"	I	nameref:module:torch.nn.functional
+F	se_block.py	/^import torch.nn.functional as F$/;"	I	nameref:module:torch.nn.functional
+FAQs	README.md	/^# FAQs$/;"	c
+IMAGENET_TRAINSET_SIZE	quantization/quant_qat_train.py	/^IMAGENET_TRAINSET_SIZE = 1281167$/;"	v
+IMAGENET_TRAINSET_SIZE	train.py	/^IMAGENET_TRAINSET_SIZE = 1281167$/;"	v
+ImageNet training	README.md	/^# ImageNet training$/;"	c
+Introduction	README.md	/^# Introduction$/;"	c
+PPM	example_segment.py	/^class PPM(nn.Module):$/;"	c
+PSPNet	example_segment.py	/^class PSPNet(nn.Module):$/;"	c
+ProgressMeter	utils.py	/^class ProgressMeter(object):$/;"	c
+Quantization	README.md	/^# Quantization$/;"	c
+RepVGG	repvgg.py	/^class RepVGG(nn.Module):$/;"	c
+RepVGG: Making VGG-style ConvNets Great Again (CVPR-2021) (PyTorch)	README.md	/^# RepVGG: Making VGG-style ConvNets Great Again (CVPR-2021) (PyTorch)$/;"	c
+RepVGGBlock	repvgg.py	/^class RepVGGBlock(nn.Module):$/;"	c
+RepVGGWholeQuant	quantization/repvgg_quantized.py	/^class RepVGGWholeQuant(nn.Module):$/;"	c
+SEBlock	se_block.py	/^class SEBlock(nn.Module):$/;"	c
+Updates	README.md	/^# Updates$/;"	c
+Use like this in your own code	README.md	/^# Use like this in your own code$/;"	c
+Use our pretrained models	README.md	/^# Use our pretrained models$/;"	c
+WarmupCosineAnnealingLR	utils.py	/^class WarmupCosineAnnealingLR(torch.optim.lr_scheduler._LRScheduler):$/;"	c
+__init__	example_segment.py	/^    def __init__(self, in_dim, reduction_dim, bins, BatchNorm):$/;"	m	class:PPM
+__init__	example_segment.py	/^    def __init__(self,$/;"	m	class:PSPNet
+__init__	insert_bn.py	/^    def __init__(self, num_features):$/;"	m	class:BNStatistics
+__init__	insert_bn.py	/^    def __init__(self, num_features):$/;"	m	class:BiasAdd
+__init__	quantization/repvgg_quantized.py	/^    def __init__(self, repvgg_model, quantlayers):$/;"	m	class:RepVGGWholeQuant
+__init__	repvgg.py	/^    def __init__(self, in_channels, out_channels, kernel_size,$/;"	m	class:RepVGGBlock
+__init__	repvgg.py	/^    def __init__(self, num_blocks, num_classes=1000, width_multiplier=None, override_groups_map=/;"	m	class:RepVGG
+__init__	se_block.py	/^    def __init__(self, input_channels, internal_neurons):$/;"	m	class:SEBlock
+__init__	utils.py	/^    def __init__(self, name, fmt=':f'):$/;"	m	class:AverageMeter
+__init__	utils.py	/^    def __init__(self, num_batches, meters, prefix=""):$/;"	m	class:ProgressMeter
+__init__	utils.py	/^    def __init__(self, optimizer, T_cosine_max, eta_min=0, last_epoch=-1, warmup=0):$/;"	m	class:WarmupCosineAnnealingLR
+__str__	utils.py	/^    def __str__(self):$/;"	m	class:AverageMeter
+_fuse_bn_tensor	repvgg.py	/^    def _fuse_bn_tensor(self, branch):$/;"	m	class:RepVGGBlock
+_get_batch_fmtstr	utils.py	/^    def _get_batch_fmtstr(self, num_batches):$/;"	m	class:ProgressMeter
+_get_qconfig	quantization/repvgg_quantized.py	/^    def _get_qconfig(self):$/;"	m	class:RepVGGWholeQuant
+_make_stage	repvgg.py	/^    def _make_stage(self, planes, num_blocks, stride):$/;"	m	class:RepVGG
+_pad_1x1_to_3x3_tensor	repvgg.py	/^    def _pad_1x1_to_3x3_tensor(self, kernel1x1):$/;"	m	class:RepVGGBlock
+accuracy	utils.py	/^def accuracy(output, target, topk=(1,)):$/;"	f
+best_acc1	quantization/quant_qat_train.py	/^best_acc1 = 0$/;"	v
+best_acc1	train.py	/^best_acc1 = 0$/;"	v
+conv_bn	repvgg.py	/^def conv_bn(in_channels, out_channels, kernel_size, stride, padding, groups=1):$/;"	f
+convert	convert.py	/^def convert():$/;"	f
+create_RepVGG_A0	repvgg.py	/^def create_RepVGG_A0(deploy=False):$/;"	f
+create_RepVGG_A1	repvgg.py	/^def create_RepVGG_A1(deploy=False):$/;"	f
+create_RepVGG_A2	repvgg.py	/^def create_RepVGG_A2(deploy=False):$/;"	f
+create_RepVGG_B0	repvgg.py	/^def create_RepVGG_B0(deploy=False):$/;"	f
+create_RepVGG_B1	repvgg.py	/^def create_RepVGG_B1(deploy=False):$/;"	f
+create_RepVGG_B1g2	repvgg.py	/^def create_RepVGG_B1g2(deploy=False):$/;"	f
+create_RepVGG_B1g4	repvgg.py	/^def create_RepVGG_B1g4(deploy=False):$/;"	f
+create_RepVGG_B2	repvgg.py	/^def create_RepVGG_B2(deploy=False):$/;"	f
+create_RepVGG_B2g2	repvgg.py	/^def create_RepVGG_B2g2(deploy=False):$/;"	f
+create_RepVGG_B2g4	repvgg.py	/^def create_RepVGG_B2g4(deploy=False):$/;"	f
+create_RepVGG_B3	repvgg.py	/^def create_RepVGG_B3(deploy=False):$/;"	f
+create_RepVGG_B3g2	repvgg.py	/^def create_RepVGG_B3g2(deploy=False):$/;"	f
+create_RepVGG_B3g4	repvgg.py	/^def create_RepVGG_B3g4(deploy=False):$/;"	f
+create_RepVGG_D2se	repvgg.py	/^def create_RepVGG_D2se(deploy=False):$/;"	f
+cudnn	insert_bn.py	/^import torch.backends.cudnn as cudnn$/;"	I	nameref:module:torch.backends.cudnn
+cudnn	quantization/quant_qat_train.py	/^import torch.backends.cudnn as cudnn$/;"	I	nameref:module:torch.backends.cudnn
+cudnn	test.py	/^import torch.backends.cudnn as cudnn$/;"	I	nameref:module:torch.backends.cudnn
+cudnn	train.py	/^import torch.backends.cudnn as cudnn$/;"	I	nameref:module:torch.backends.cudnn
+datasets	utils.py	/^import torchvision.datasets as datasets$/;"	I	nameref:module:torchvision.datasets
+deploy_model	example_segment.py	/^    deploy_model = PSPNet(backbone_name='RepVGG-A0', backbone_file=None, deploy=True, classes=19/;"	v
+deploy_y	verify.py	/^    deploy_y = model(x)$/;"	v
+directly_insert_bn_without_init	insert_bn.py	/^def directly_insert_bn_without_init(model):$/;"	f
+display	utils.py	/^    def display(self, batch):$/;"	m	class:ProgressMeter
+dist	quantization/quant_qat_train.py	/^import torch.distributed as dist$/;"	I	nameref:module:torch.distributed
+dist	train.py	/^import torch.distributed as dist$/;"	I	nameref:module:torch.distributed
+forward	example_segment.py	/^    def forward(self, x):$/;"	m	class:PPM
+forward	example_segment.py	/^    def forward(self, x, y=None):$/;"	m	class:PSPNet
+forward	insert_bn.py	/^    def forward(self, x):$/;"	m	class:BNStatistics
+forward	insert_bn.py	/^    def forward(self, x):$/;"	m	class:BiasAdd
+forward	quantization/repvgg_quantized.py	/^    def forward(self, x):$/;"	m	class:RepVGGWholeQuant
+forward	repvgg.py	/^    def forward(self, inputs):$/;"	m	class:RepVGGBlock
+forward	repvgg.py	/^    def forward(self, x):$/;"	m	class:RepVGG
+forward	se_block.py	/^    def forward(self, inputs):$/;"	m	class:SEBlock
+freeze_quant_bn	quantization/repvgg_quantized.py	/^    def freeze_quant_bn(self):$/;"	m	class:RepVGGWholeQuant
+func_dict	repvgg.py	/^func_dict = {$/;"	v
+fuse_model	quantization/repvgg_quantized.py	/^    def fuse_model(self):$/;"	m	class:RepVGGWholeQuant
+g2_map	repvgg.py	/^g2_map = {l: 2 for l in optional_groupwise_layers}$/;"	v
+g4_map	repvgg.py	/^g4_map = {l: 4 for l in optional_groupwise_layers}$/;"	v
+get_ImageNet_train_dataset	utils.py	/^def get_ImageNet_train_dataset(args, trans):$/;"	f
+get_ImageNet_val_dataset	utils.py	/^def get_ImageNet_val_dataset(args, trans):$/;"	f
+get_RepVGG_func_by_name	repvgg.py	/^def get_RepVGG_func_by_name(name):$/;"	f
+get_custom_L2	repvgg.py	/^    def get_custom_L2(self):$/;"	m	class:RepVGGBlock
+get_default_ImageNet_train_sampler_loader	utils.py	/^def get_default_ImageNet_train_sampler_loader(args):$/;"	f
+get_default_ImageNet_val_loader	utils.py	/^def get_default_ImageNet_val_loader(args):$/;"	f
+get_default_train_trans	utils.py	/^def get_default_train_trans(args):$/;"	f
+get_default_val_trans	utils.py	/^def get_default_val_trans(args):$/;"	f
+get_equivalent_kernel_bias	repvgg.py	/^    def get_equivalent_kernel_bias(self):$/;"	m	class:RepVGGBlock
+get_lr	utils.py	/^    def get_lr(self):$/;"	m	class:WarmupCosineAnnealingLR
+input	example_segment.py	/^    input = torch.rand(4, 3, 713, 713)$/;"	v
+insert_bn	insert_bn.py	/^def insert_bn():$/;"	f
+load_checkpoint	utils.py	/^def load_checkpoint(model, ckpt_path):$/;"	f
+log_msg	utils.py	/^def log_msg(message, log_file):$/;"	f
+main	quantization/quant_qat_train.py	/^def main():$/;"	f
+main	train.py	/^def main():$/;"	f
+main_worker	quantization/quant_qat_train.py	/^def main_worker(gpu, ngpus_per_node, args):$/;"	f
+main_worker	train.py	/^def main_worker(gpu, ngpus_per_node, args):$/;"	f
+model	example_segment.py	/^    model = PSPNet(backbone_name='RepVGG-A0', backbone_file='RepVGG-A0-train.pth', deploy=False,/;"	v
+model	verify.py	/^    model = create_RepVGG_B1(deploy=False)$/;"	v
+model_load_hdf5	utils.py	/^def model_load_hdf5(model:torch.nn.Module, hdf5_path, ignore_keys='stage0.'):$/;"	f
+mp	quantization/quant_qat_train.py	/^import torch.multiprocessing as mp$/;"	I	nameref:module:torch.multiprocessing
+mp	train.py	/^import torch.multiprocessing as mp$/;"	I	nameref:module:torch.multiprocessing
+nn	insert_bn.py	/^import torch.nn as nn$/;"	I	nameref:module:torch.nn
+nn	quantization/quant_qat_train.py	/^import torch.nn as nn$/;"	I	nameref:module:torch.nn
+nn	quantization/repvgg_quantized.py	/^import torch.nn as nn$/;"	I	nameref:module:torch.nn
+nn	repvgg.py	/^import torch.nn as nn$/;"	I	nameref:module:torch.nn
+nn	se_block.py	/^import torch.nn as nn$/;"	I	nameref:module:torch.nn
+nn	test.py	/^import torch.nn as nn$/;"	I	nameref:module:torch.nn
+nn	train.py	/^import torch.nn as nn$/;"	I	nameref:module:torch.nn
+nn	verify.py	/^import torch.nn as nn$/;"	I	nameref:module:torch.nn
+np	repvgg.py	/^import numpy as np$/;"	I	nameref:module:numpy
+np	utils.py	/^    import numpy as np$/;"	I	function:read_hdf5	file:	nameref:module:numpy
+optional_groupwise_layers	repvgg.py	/^optional_groupwise_layers = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]$/;"	v
+parser	convert.py	/^parser = argparse.ArgumentParser(description='RepVGG Conversion')$/;"	v
+parser	insert_bn.py	/^parser = argparse.ArgumentParser(description='Get the mean and std on every conv3x3 (before the /;"	v
+parser	quantization/quant_qat_train.py	/^parser = argparse.ArgumentParser(description='PyTorch Whole Model Quant')$/;"	v
+parser	test.py	/^parser = argparse.ArgumentParser(description='PyTorch ImageNet Test')$/;"	v
+parser	train.py	/^parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')$/;"	v
+prepare_quant	quantization/repvgg_quantized.py	/^    def prepare_quant(self):$/;"	m	class:RepVGGWholeQuant
+read_hdf5	utils.py	/^def read_hdf5(file_path):$/;"	f
+repvgg_model_convert	repvgg.py	/^def repvgg_model_convert(model:torch.nn.Module, save_path=None, do_copy=True):$/;"	f
+reset	utils.py	/^    def reset(self):$/;"	m	class:AverageMeter
+save_checkpoint	quantization/quant_qat_train.py	/^def save_checkpoint(state, is_best, filename, best_filename):$/;"	f
+save_checkpoint	train.py	/^def save_checkpoint(state, is_best, filename, best_filename):$/;"	f
+sgd_optimizer	quantization/quant_qat_train.py	/^def sgd_optimizer(model, lr, momentum, weight_decay):$/;"	f
+sgd_optimizer	train.py	/^def sgd_optimizer(model, lr, momentum, weight_decay, use_custwd):$/;"	f
+switch_bnstat_to_convbn	insert_bn.py	/^def switch_bnstat_to_convbn(model):$/;"	f
+switch_repvggblock_to_bnstat	insert_bn.py	/^def switch_repvggblock_to_bnstat(model):$/;"	f
+switch_to_deploy	repvgg.py	/^    def switch_to_deploy(self):$/;"	m	class:RepVGGBlock
+test	test.py	/^def test():$/;"	f
+train	quantization/quant_qat_train.py	/^def train(train_loader, model, criterion, optimizer, epoch, args, lr_scheduler, is_main):$/;"	f
+train	train.py	/^def train(train_loader, model, criterion, optimizer, epoch, args, lr_scheduler, is_main):$/;"	f
+train_y	verify.py	/^    train_y = model(x)$/;"	v
+transforms	utils.py	/^import torchvision.transforms as transforms$/;"	I	nameref:module:torchvision.transforms
+update	utils.py	/^    def update(self, val, n=1):$/;"	m	class:AverageMeter
+update_running_mean_var	insert_bn.py	/^def update_running_mean_var(x, running_mean, running_var, momentum=0.9, is_first_batch=False):$/;"	f
+validate	quantization/quant_qat_train.py	/^def validate(val_loader, model, criterion, args):$/;"	f
+validate	test.py	/^def validate(val_loader, model, criterion, use_gpu):$/;"	f
+validate	train.py	/^def validate(val_loader, model, criterion, args):$/;"	f
+x	verify.py	/^    x = torch.randn(1, 3, 224, 224)$/;"	v
+y_deploy	example_segment.py	/^    y_deploy = deploy_model(input)$/;"	v
+y_deploy	example_segment.py	/^    y_deploy = model(input)$/;"	v
+y_train	example_segment.py	/^    y_train = model(input)$/;"	v
